@@ -23,7 +23,7 @@ router.get("/", (req, response) => {
 });
 router.get("/api/todo", async (req, response) => {
     const resp = await todo.find();
-    response.json(resp);
+    response.status(200).json(resp);
 });
 
 module.exports = router;
