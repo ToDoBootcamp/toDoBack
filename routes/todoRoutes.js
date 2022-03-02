@@ -24,9 +24,8 @@ router.put("/api/todo/:id", (req, response) =>{
 
   todo.findOneAndUpdate({id: id}, updateTodo, {new: true}, (err, result) => {
     if(err) throw new Error(err)
-    response.json(result)
+    response.status(200).json(result)
   })
-
 })
 
 module.exports = router;
