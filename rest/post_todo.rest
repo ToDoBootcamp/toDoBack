@@ -9,3 +9,9 @@ Content-Type: application/json
     "state": "incompeted",
     "deleted": false
 }
+
+###
+POST http://localhost:3001/new
+Content-Type: application/json
+
+{}

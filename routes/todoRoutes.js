@@ -1,4 +1,6 @@
 const router = require("express").Router()
+const e = require("express")
+const res = require("express/lib/response")
 const todo = require("../models/todo")
 
 /* endpoints */
@@ -39,18 +41,22 @@ router.delete("/api/todo/:id", async (req, response) => {
   const id = req.params["id"]
   await todo.findOneAndRemove({ id })
   response.status(204).json({})
-  console.log(id)
 })
 
 /* create a document with the information of the request */
 router.post("/new", (req, response) => {
   try {
-    console.log(req.body)
-    todo.create(req.body)
-    response.status(201)
+    if(Object.keys(req.body).length !== 0){
+      console.log(req.body)
+      todo.create(req.body) // create in db
+      response.status(201)
+    }else{
+      response.status(500).json({
+        "error" : "Not content"
+      })
+    }
   } catch (err){ 
     response.status(500)
-    
   }
 })
 
