@@ -1,6 +1,4 @@
 const router = require("express").Router()
-const e = require("express")
-const res = require("express/lib/response")
 const todo = require("../models/todo")
 
 /* endpoints */
