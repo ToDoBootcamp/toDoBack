@@ -16,21 +16,17 @@ router.put("/api/todo/:id", (req, response) =>{
   const body = req.body
 
   const updateTodo = {
-    "id": id,
     "title": body.title,
     "description": body.description,
-    "date": new Date().toISOString(),
-    "state": body.state,
-    "deleted": body.deleted,
+    "state": body.state || 'incomplete',
+    "deleted": body.deleted || false,
   }
 
-  todo.findOneAndUpdate({id: id}, updateTodo, (err, result) => {
+  todo.findOneAndUpdate({id: id}, updateTodo, {new: true}, (err, result) => {
     if(err) throw new Error(err)
-    res.json(result)
+    response.json(result)
   })
 
-  console.log({ newTodo: updateTodo })
-  // response.json(updateTodo)
 })
 
 module.exports = router;
