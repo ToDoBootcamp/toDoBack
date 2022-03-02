@@ -24,6 +24,6 @@ router.get("/", (req, response) => {
 router.get("/api/todo", async (req, response) => {
     const resp = await todo.find();
     response.json(resp);
-})
+});
 
 module.exports = router;
