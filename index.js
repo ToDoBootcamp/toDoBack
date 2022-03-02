@@ -21,7 +21,9 @@ let todo = [
 
 // Endpoints
 app.get('/', (request, response) => {
+
   response.send('<h1>Todo List "Flores El Tambo"</h1>')
+  
 })
 
 app.get('/api/todo', (request, response) => {
