@@ -1,8 +1,8 @@
-PUT http://localhost:3001/api/todo/2
+PUT http://localhost:3001/api/todo/3
 Content-Type: application/json
 
 {
-  "title": "Test ToDo updated by Jairo hola hola 123",
+  "title": "Actualizado",
   "description": "Todo Updated succesfull",
   "state": "incompleted"
 }

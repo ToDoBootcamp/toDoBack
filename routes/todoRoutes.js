@@ -1,16 +1,20 @@
 const router = require("express").Router()
 const todo = require("../models/todo")
 
-const todo = require("../models/todo")
-
 /* endpoints */
 router.get("/", (req, response) => {
-    response.send('<h1>Todo List "Flores El Tambo"</h1>');
+    response.send('<h1>Todo List "Flores El Tambo"</h1>')
 })
 
 router.get("/api/todo", async (req, response) => {
-    const resp = await todo.find();
-    response.status(200).json(resp);
+    const resp = await todo.find()
+    response.status(200).json(resp)
+})
+
+router.get("/api/todo/:id", async (req, response) => {
+  const id = req.params['id']
+  const resp = await todo.findOne({id: id})
+  response.status(200).json(resp)
 })
 
 router.put("/api/todo/:id", (req, response) =>{
