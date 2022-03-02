@@ -1,0 +1,11 @@
+POST http://localhost:3001/new
+Content-Type: application/json
+
+{
+    "id": 3,
+    "title": "hablar con el proveedor",
+    "description": "hablar con el proveedor",
+    "date": "2022-06-17",
+    "state": "incompeted",
+    "deleted": false
+}
