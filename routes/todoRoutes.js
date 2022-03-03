@@ -13,7 +13,7 @@ router.get("/api/todo", async (req, response) => {
 
 router.get("/api/todo/:id", async (req, response) => {
   const id = req.params['id']
-  const resp = await todo.findOne({id: id})
+  const resp = await todo.findOne({_id: id})
   response.status(200).json(resp)
 })
 
@@ -37,7 +37,7 @@ router.put("/api/todo/:id", (req, response) =>{
 // Deleted
 router.delete("/api/todo/:id", async (req, response) => {
   const id = req.params["id"]
-  await todo.findOneAndRemove({ id: id })
+  await todo.findOneAndRemove({ _id: id })
   response.status(204).json({})
 })
 

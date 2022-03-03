@@ -7,25 +7,22 @@ const api = supertest(app)
 
 const initialTodo = [
   {
-    id:3,
-    title:"hablar con el proveedor 1",
-    description:"hablar con el proveedor 1",
-    date:"2022-06-17",
-    state:"incompeted",
+    title:"Restructurando el backend 1",
+    description:"Restructuracion del backend para lograr mejor rendimiento",
+    date:"3/3/2022",
+    completed:false,
     deleted:false
   },{
-    id:2,
-    title:"hablar con el proveedor 2",
-    description:"hablar con el proveedor 2",
-    date:"2022-06-17",
-    state:"incompeted",
+    title:"Restructurando el backend 2",
+    description:"Restructuracion del backend para lograr mejor rendimiento",
+    date:"3/3/2022",
+    completed:false,
     deleted:false
   },{
-    id:1,
-    title:"hablar con el proveedor 3 ",
-    description:"hablar con el proveedor 3",
-    date:"2022-06-17",
-    state:"incompeted",
+    title:"Restructurando el backend 3",
+    description:"Restructuracion del backend para lograr mejor rendimiento",
+    date:"3/3/2022",
+    completed:false,
     deleted:false
   }
 ]
@@ -46,6 +43,7 @@ beforeEach(async () => {
   await todo3.save()
 })
 
+// Test to root path
 describe("Test the root path", () => {
   test("It should response the GET method", async () => {
     await api
@@ -54,6 +52,7 @@ describe("Test the root path", () => {
   })
 })
 
+// Test to GET method
 describe("Test GET methods to server", () => {
   test('notes are returned as json', async () => {
     await api
@@ -64,16 +63,16 @@ describe("Test GET methods to server", () => {
 
   test('there are three note', async () => {
     const response = await api.get('/api/todo')
-      expect(response.body).toHaveLength(2)
+      expect(response.body).toHaveLength(initialTodo.length)
   })
 })
 
+// Test in wrong url
 test('there are notting', async () => {
   await api
     .get('/api/something')
     .expect(404)
 })
-
 
 afterAll(() => {
   mongoose.connection.close()
