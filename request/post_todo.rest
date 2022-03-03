@@ -1,0 +1,13 @@
+POST http://localhost:3001/new
+Content-Type: application/json
+
+{
+    "title": "Restructurando el backend 1",
+    "description": "Restructuracion del backend para lograr mejor rendimiento"
+}
+
+###
+POST http://localhost:3001/new
+Content-Type: application/json
+
+{}

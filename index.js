@@ -1,3 +1,4 @@
+const config = require('./config')
 const express = require('express')
 const app = express()
 const todoRoutes = require("./routes/todoRoutes")
@@ -13,9 +14,6 @@ app.use("/api/todo", todoRoutes) // get all
 app.use("/new", todoRoutes) // create one
 app.use("api/todo/:id", todoRoutes) // update | delete
 
-mongoose.connect("mongodb+srv://jairo:Jairo.228@cluster0.ul8oe.mongodb.net/todoList?retryWrites=true&w=majority") // Change this MONGO URI IN PRODUCTION
-  .then(() => console.log("Connected successfully")).catch((err) => console.error(err))
-
 // Error 404
 app.use((req, response) => {
   response.status(404).json({
@@ -23,7 +21,11 @@ app.use((req, response) => {
   })
 })
 
-const PORT = process.env.PORT || 3001 // port where the server runs
+mongoose.connect(config.NODE_ENV === 'development' ? config.MONGO_ENV_DEV : config.MONGO_ENV_PRODUCTION)
+  .then(() => console.log("Connected successfully")).catch((err) => console.error(err))
+
+
+const PORT = process.env.PORT || config.PORT // port where the server runs
 const server = app.listen(PORT, () => { // server started asynchronously
   console.log(`Server running on http://localhost:${PORT}`)
 })

@@ -1,11 +1,10 @@
 const mongoose = require("mongoose");
 
 const TodoSchema = new mongoose.Schema({
-    id: Number,
     title: String,
     description: String,
-    date: Date,
-    state: String,
+    date: String,
+    completed: Boolean,
     deleted: Boolean
 })
 

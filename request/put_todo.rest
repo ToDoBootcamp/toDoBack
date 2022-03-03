@@ -1,4 +1,4 @@
-PUT http://localhost:3001/api/todo/3
+PUT http://localhost:3001/api/todo/6
 Content-Type: application/json
 
 {

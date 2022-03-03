@@ -3,7 +3,7 @@ const todo = require("../models/todo")
 
 /* endpoints */
 router.get("/", (req, response) => {
-    response.send('<h1>Todo List "Flores El Tambo"</h1>')
+    response.status(200).send('<h1>Todo List "Flores El Tambo"</h1>')
 })
 
 router.get("/api/todo", async (req, response) => {
@@ -37,16 +37,25 @@ router.put("/api/todo/:id", (req, response) =>{
 // Deleted
 router.delete("/api/todo/:id", async (req, response) => {
   const id = req.params["id"]
-  await todo.findOneAndRemove({ id })
+  await todo.findOneAndRemove({ id: id })
   response.status(204).json({})
 })
 
 /* create a document with the information of the request */
 router.post("/new", (req, response) => {
+  const body = req.body
+  
+  const newTodo = {
+    "title": body.title,
+    "description": body.description,
+    "date": new Date().toLocaleDateString(),
+    "completed": false,
+    "deleted": false
+  }
+
   try {
-    if(Object.keys(req.body).length !== 0){
-      console.log(req.body)
-      todo.create(req.body) // create in db
+    if(body.description && body.title){
+      todo.create(newTodo) // create in db
       response.status(201)
     }else{
       response.status(500).json({

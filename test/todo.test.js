@@ -7,15 +7,29 @@ const api = supertest(app)
 
 const initialTodo = [
   {
-    _id:'6220372d93bd49646ab6b476',
     id:3,
-    title:"hablar con el proveedor",
-    description:"hablar con el proveedor",
+    title:"hablar con el proveedor 1",
+    description:"hablar con el proveedor 1",
+    date:"2022-06-17",
+    state:"incompeted",
+    deleted:false
+  },{
+    id:2,
+    title:"hablar con el proveedor 2",
+    description:"hablar con el proveedor 2",
+    date:"2022-06-17",
+    state:"incompeted",
+    deleted:false
+  },{
+    id:1,
+    title:"hablar con el proveedor 3 ",
+    description:"hablar con el proveedor 3",
     date:"2022-06-17",
     state:"incompeted",
     deleted:false
   }
 ]
+
 
 // Create in database 3 this todos for test
 beforeEach(async () => {
@@ -32,17 +46,34 @@ beforeEach(async () => {
   await todo3.save()
 })
 
-test('notes are returned as json', async () => {
-  await api
-    .get('/api/todo')
-    .expect(200)
-    .expect('Content-Type', /application\/json/)
+describe("Test the root path", () => {
+  test("It should response the GET method", async () => {
+    await api
+      .get('/')
+      .expect(200)
+  })
 })
 
-test('tere are three note', async () => {
-  const response = await api.get('/api/todo')
-    expect(response.body).toHaveLength(3)
+describe("Test GET methods to server", () => {
+  test('notes are returned as json', async () => {
+    await api
+      .get('/api/todo')
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+  })
+
+  test('there are three note', async () => {
+    const response = await api.get('/api/todo')
+      expect(response.body).toHaveLength(2)
+  })
 })
+
+test('there are notting', async () => {
+  await api
+    .get('/api/something')
+    .expect(404)
+})
+
 
 afterAll(() => {
   mongoose.connection.close()
